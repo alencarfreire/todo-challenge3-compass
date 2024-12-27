@@ -21,7 +21,10 @@ export function AuthProvider({ children }: Props) {
     console.log("clicou login");
     setIsAuthenticated(true);
   };
-  const handleLogout = () => setIsAuthenticated(false);
+  const handleLogout = () => {
+    console.log("cliclou logout");
+    setIsAuthenticated(false);
+  };
 
   return (
     <AuthContext.Provider
