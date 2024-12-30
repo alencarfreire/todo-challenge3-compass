@@ -24,7 +24,7 @@ export default function Authentication() {
         </S.FormUsername>
         <S.FormPassword>
           <Input placeholder="Password" />
-          <Button onPress={handleViewPassword}>
+          <Button onPress={handleViewPassword} padding="15px 20px">
             {viewPassword ? (
               <EyeSlash fill={"#fff"} width={20} />
             ) : (

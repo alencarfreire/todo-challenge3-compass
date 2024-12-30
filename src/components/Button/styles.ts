@@ -1,9 +1,14 @@
 import styled from "styled-components/native";
 import { theme } from "../../theme/theme";
 
-export const Button = styled.TouchableOpacity`
+interface ButtonProps {
+  padding?: string;
+}
+
+export const Button = styled.TouchableOpacity<ButtonProps>`
   background-color: ${theme.colors.main.purpleDark};
-  padding: 21px;
+  padding: ${({ padding }: { padding: string }) =>
+    padding ? padding : "21px"};
   gap: 8px;
   justify-content: center;
   align-items: center;

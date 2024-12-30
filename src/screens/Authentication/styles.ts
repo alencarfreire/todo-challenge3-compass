@@ -18,7 +18,10 @@ export const Title = styled.Text`
   font-family: ${theme.font.family.input};
 `;
 
-export const Form = styled.View``;
+export const Form = styled.View`
+  margin: 81px 24px 0 24px;
+  gap: 15px;
+`;
 
 export const FormUsername = styled.View`
   flex-direction: row;
@@ -28,4 +31,5 @@ export const FormPassword = styled.View`
   flex-direction: row;
   gap: 8px;
   width: 100%;
+  align-items: center;
 `;

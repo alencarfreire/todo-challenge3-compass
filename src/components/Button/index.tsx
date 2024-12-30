@@ -6,12 +6,19 @@ type Props = {
   children?: React.ReactNode;
   onPress?: () => void;
   variant?: "Authentication" | "home";
+  padding?: string;
 };
 
-export default function Button({ text, children, onPress, variant }: Props) {
+export default function Button({
+  text,
+  children,
+  onPress,
+  variant,
+  padding,
+}: Props) {
   return (
     <>
-      <S.Button onPress={onPress}>
+      <S.Button onPress={onPress} padding={padding}>
         {text && <S.ButtonText variant={variant}>{text}</S.ButtonText>}
         {children}
       </S.Button>
