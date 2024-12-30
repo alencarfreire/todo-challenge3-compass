@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import * as S from "./styles";
-import CloseIcon from "../../assets/close.svg";
+
 import Input from "../Input";
 import Button from "../Button";
 import CirclePlus from "../../assets/plus-circle-regular.svg";
+import HeaderModal from "../HeaderModal";
+import { useModal } from "../../context/ModalContext";
 
 export default function NewTask() {
+  const { closeModal } = useModal();
   return (
     <>
-      <S.Header>
-        <S.Title>Nova tarefa</S.Title>
-        <S.Close>
-          <CloseIcon />
-        </S.Close>
-      </S.Header>
+      <HeaderModal title="Nova Tarefa" onPress={closeModal} />
       <S.Form>
         <Input placeholder="Adicione uma nova tarefa" />
         <Button>

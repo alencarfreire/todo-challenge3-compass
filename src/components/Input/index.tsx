@@ -13,6 +13,7 @@ export default function Input({ placeholder }: Props) {
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       placeholder={placeholder}
+      multiline
     />
   );
 }
