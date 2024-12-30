@@ -8,12 +8,15 @@ import { AuthContext } from "../../context/AuthContext";
 import SignOut from "../../assets/sign-out.svg";
 import MagnifyingGlass from "../../assets/magnifying-glass.svg";
 import PlusCircle from "../../assets/plus-circle-regular.svg";
-import Task from "../../components/Task";
 import TaskList from "../../components/TaskList";
 import { DataProvider } from "../../context/DataContext";
+import { CustomModal } from "../../components/CustomModal";
+import NewTask from "../../components/NewTask";
+import { useModal } from "../../context/ModalContext";
 
 export default function Home() {
   const auth = React.useContext(AuthContext);
+  const { openModal } = useModal();
   return (
     <>
       <StatusBar barStyle={"dark-content"} translucent />
@@ -40,11 +43,12 @@ export default function Home() {
           </S.ContainerTasks>
         </DataProvider>
         <S.ContainerNewTask>
-          <Button text="Criar">
+          <Button text="Criar" onPress={() => openModal(<NewTask />)}>
             <PlusCircle />
           </Button>
         </S.ContainerNewTask>
       </S.Container>
+      <CustomModal />
     </>
   );
 }

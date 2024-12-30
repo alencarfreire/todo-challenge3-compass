@@ -19,7 +19,9 @@ export default function Authentication() {
     <S.Container>
       <Logo />
       <S.Form>
-        <Input placeholder="Username" />
+        <S.FormUsername>
+          <Input placeholder="Username" />
+        </S.FormUsername>
         <S.FormPassword>
           <Input placeholder="Password" />
           <Button onPress={handleViewPassword}>

@@ -5,9 +5,8 @@ export const TextInput = styled.TextInput.attrs(() => ({
   placeholderTextColor: theme.colors.base.gray500,
 }))`
   background-color: ${theme.colors.base.gray100};
-  padding: 15px 18px;
   flex: 1;
-  min-height: 65px;
+  padding: 18px;
   border: 2px solid;
   border-radius: 8px;
   font-family: ${theme.font.family.input};

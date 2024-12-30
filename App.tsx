@@ -11,6 +11,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthProvider } from "./src/context/AuthContext";
 import AuthConsumer from "./src/routes/AuthConsumer";
+import { ModalProvider } from "./src/context/ModalContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -26,7 +27,9 @@ export default function App() {
         <AuthProvider>
           <ThemeProvider theme={theme}>
             <StatusBar style="auto" />
-            <AuthConsumer />
+            <ModalProvider>
+              <AuthConsumer />
+            </ModalProvider>
           </ThemeProvider>
         </AuthProvider>
       </NavigationContainer>

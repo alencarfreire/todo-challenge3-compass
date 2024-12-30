@@ -18,12 +18,12 @@ export const Title = styled.Text`
   font-family: ${theme.font.family.input};
 `;
 
-export const Form = styled.View`
-  margin-top: 66px;
-  padding: 0 24px;
-  gap: 15px;
-  width: 100%;
+export const Form = styled.View``;
+
+export const FormUsername = styled.View`
+  flex-direction: row;
 `;
+
 export const FormPassword = styled.View`
   flex-direction: row;
   gap: 8px;
