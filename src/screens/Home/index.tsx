@@ -32,7 +32,7 @@ export default function Home() {
           </S.LogoContainer>
           <S.SearchContainer>
             <Input placeholder="Pesquisar Tarefa" />
-            <Button>
+            <Button padding="14px 18px">
               <MagnifyingGlass width={23} fill="white" />
             </Button>
           </S.SearchContainer>
@@ -43,7 +43,11 @@ export default function Home() {
           </S.ContainerTasks>
         </DataProvider>
         <S.ContainerNewTask>
-          <Button text="Criar" onPress={() => openModal(<NewTask />)}>
+          <Button
+            padding="16px 24px"
+            text="Criar"
+            onPress={() => openModal(<NewTask />)}
+          >
             <PlusCircle />
           </Button>
         </S.ContainerNewTask>

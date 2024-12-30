@@ -7,7 +7,7 @@ import CircleCheck from "../../assets/check-circle-fill.svg";
 type Props = {
   name: string;
   done: boolean;
-  onPress: () => void;
+  onPress?: () => void;
 };
 
 export default function Task({ name, done, onPress }: Props) {

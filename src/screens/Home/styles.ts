@@ -29,6 +29,7 @@ export const SearchContainer = styled.View`
   margin: 0 24px;
   margin-top: 65px;
   gap: 8px;
+  justify-content: center;
 `;
 
 export const ContainerTasks = styled.View`
@@ -40,3 +41,5 @@ export const ContainerNewTask = styled.View`
   align-self: flex-end;
   margin: 0 24px 61px 0;
 `;
+
+export const ScrollView = styled.ScrollView``;

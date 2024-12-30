@@ -61,6 +61,7 @@ export default function TaskList() {
         data={sortedTasks}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => <Task name={item.name} done={item.done} />}
+        initialNumToRender={6}
       />
     </>
   );
