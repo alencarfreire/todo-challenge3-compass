@@ -1,5 +1,10 @@
 import styled from "styled-components/native";
 import { theme } from "../../theme/theme";
+import EyeSlash from "../../assets/eye-slash.svg";
+
+export const EyeSlashIcon = styled(EyeSlash)`
+  color: white;
+`;
 
 export const Container = styled.View`
   flex: 1;

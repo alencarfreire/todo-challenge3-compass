@@ -35,7 +35,7 @@ export const theme = {
       subtitle: "14px",
       tag: "12px",
       textMd: "14px",
-      textSm: "14px",
+      textSm: "12px",
     },
     lineHeight: {
       input: "22.4px",

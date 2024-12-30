@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import * as S from "./styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import * as Icon from "phosphor-react-native";
 import Logo from "../../assets/logo.svg";
 import { AuthContext } from "../../context/AuthContext";
+import Eye from "../../assets/eye.svg";
+import EyeSlash from "../../assets/eye-slash.svg";
 
 export default function Authentication() {
   const [viewPassword, setViewPassword] = React.useState(false);
@@ -23,9 +24,9 @@ export default function Authentication() {
           <Input placeholder="Password" />
           <Button onPress={handleViewPassword}>
             {viewPassword ? (
-              <Icon.EyeSlash color="white" size={20} weight="bold" />
+              <EyeSlash fill={"#fff"} width={20} />
             ) : (
-              <Icon.Eye color="white" size={20} weight="bold" />
+              <Eye fill={"#fff"} width={20} />
             )}
           </Button>
         </S.FormPassword>

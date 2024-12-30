@@ -1,0 +1,17 @@
+export const dataTasks = [
+  { name: "Organizar a estante de livros e documentos pessoais", done: false },
+  { name: "Limpar o filtro da máquina de lavar roupa", done: false },
+  { name: "Responder e-mails pendentes do trabalho", done: false },
+  { name: "Atualizar a planilha de gastos mensais", done: false },
+  { name: "Planejar o cardápio da semana e a lista de compras", done: false },
+  { name: "Configurar o backup automático no Google Drive", done: false },
+  { name: "Terminar a leitura do livro sobre produtividade", done: false },
+  { name: "Revisar o código do projeto antes da entrega", done: true },
+  { name: "Montar o móvel novo para o quarto", done: false },
+  { name: "Trocar as lâmpadas queimadas da sala", done: true },
+  { name: "Realizar 30 minutos de exercício físico", done: false },
+  { name: "Verificar a validade dos alimentos na despensa", done: true },
+  { name: "Revisar o contrato de prestação de serviços", done: false },
+  { name: "Agendar a consulta médica de rotina", done: false },
+  { name: "Baixar e organizar as fotos da última viagem", done: true },
+];

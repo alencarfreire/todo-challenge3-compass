@@ -3,9 +3,14 @@ import React from "react";
 import Button from "../../components/Button";
 import * as S from "./styles";
 import Logo from "../../assets/logo.svg";
-import { MagnifyingGlass, SignOut } from "phosphor-react-native";
 import Input from "../../components/Input";
 import { AuthContext } from "../../context/AuthContext";
+import SignOut from "../../assets/sign-out.svg";
+import MagnifyingGlass from "../../assets/magnifying-glass.svg";
+import PlusCircle from "../../assets/plus-circle-regular.svg";
+import Task from "../../components/Task";
+import TaskList from "../../components/TaskList";
+import { DataProvider } from "../../context/DataContext";
 
 export default function Home() {
   const auth = React.useContext(AuthContext);
@@ -16,7 +21,7 @@ export default function Home() {
         <S.Header>
           <S.ContainerLogout>
             <S.ButtonLogout onPress={auth?.handleLogout}>
-              <SignOut size={26} />
+              <SignOut width={26} />
             </S.ButtonLogout>
           </S.ContainerLogout>
           <S.LogoContainer>
@@ -25,20 +30,20 @@ export default function Home() {
           <S.SearchContainer>
             <Input placeholder="Pesquisar Tarefa" />
             <Button>
-              <MagnifyingGlass color="white" />
+              <MagnifyingGlass width={23} fill="white" />
             </Button>
           </S.SearchContainer>
         </S.Header>
-        <S.ContainerInfo>
-          <S.ContainerStatus>
-            <S.TextStatus>Tarefas Criadas</S.TextStatus>
-            <S.Number>16</S.Number>
-          </S.ContainerStatus>
-          <S.ContainerStatus>
-            <S.TextStatus>Concluídas</S.TextStatus>
-            <S.Number tasks="done">8</S.Number>
-          </S.ContainerStatus>
-        </S.ContainerInfo>
+        <DataProvider>
+          <S.ContainerTasks>
+            <TaskList />
+          </S.ContainerTasks>
+        </DataProvider>
+        <S.ContainerNewTask>
+          <Button text="Criar">
+            <PlusCircle />
+          </Button>
+        </S.ContainerNewTask>
       </S.Container>
     </>
   );
