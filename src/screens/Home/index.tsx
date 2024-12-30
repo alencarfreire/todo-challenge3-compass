@@ -32,7 +32,7 @@ export default function Home() {
           </S.LogoContainer>
           <S.SearchContainer>
             <Input placeholder="Pesquisar Tarefa" />
-            <Button padding="14px 18px">
+            <Button padding="14px 20px">
               <MagnifyingGlass width={23} fill="white" />
             </Button>
           </S.SearchContainer>
