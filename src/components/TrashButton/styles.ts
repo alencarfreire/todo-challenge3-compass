@@ -8,3 +8,7 @@ export const Buttons = styled.View`
   justify-content: center;
   margin-top: 26px;
 `;
+
+export const ContainerInput = styled.View`
+  height: 80px;
+`;

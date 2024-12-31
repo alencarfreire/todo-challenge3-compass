@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import * as S from "./styles";
 
 type Props = {
-  placeholder: string;
+  placeholder?: string;
+  value?: string;
 };
 
-export default function Input({ placeholder }: Props) {
+export default function Input({ placeholder, value }: Props) {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <S.TextInput
@@ -14,6 +15,7 @@ export default function Input({ placeholder }: Props) {
       onBlur={() => setIsFocused(false)}
       placeholder={placeholder}
       multiline
+      value={value}
     />
   );
 }
