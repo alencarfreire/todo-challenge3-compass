@@ -14,7 +14,7 @@ export default function TrashButton({ taskName }: Props) {
   const [editedName, setEditedName] = useState(taskName);
   const { closeModal } = useModal();
   return (
-    <>
+    <S.Container>
       {isEditing ? (
         <>
           <HeaderModal title="Editar tarefa" onPress={closeModal} />
@@ -37,6 +37,6 @@ export default function TrashButton({ taskName }: Props) {
         )}
         <Button text="Remover" />
       </S.Buttons>
-    </>
+    </S.Container>
   );
 }

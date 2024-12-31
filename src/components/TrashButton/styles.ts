@@ -1,6 +1,15 @@
 import styled from "styled-components/native";
+import { theme } from "../../theme/theme";
 
-export const TitleTask = styled.Text``;
+export const Container = styled.View``;
+
+export const TitleTask = styled.Text`
+  font-family: ${theme.font.family.textSm};
+  font-size: ${theme.font.size.textSm};
+  line-height: ${theme.font.lineHeight.textSm};
+  color: ${theme.colors.base.gray600};
+  margin-top: 16px;
+`;
 export const Buttons = styled.View`
   flex-direction: row;
   gap: 8px;

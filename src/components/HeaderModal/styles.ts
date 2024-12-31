@@ -4,7 +4,6 @@ import { theme } from "../../theme/theme";
 export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 25px;
   align-items: center;
 `;
 export const Title = styled.Text`
