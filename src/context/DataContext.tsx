@@ -1,14 +1,25 @@
 import React from "react";
-import { dataTasks } from "../data/dataTasks";
+import api from "../services/api";
 
 interface Task {
-  name: string;
-  done: boolean;
+  tarefa: string;
+  status: boolean;
+  id: number;
 }
 
 interface DataContext {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  getData: () => Promise<Task[]>;
+  createTask: (task: { name: string }) => void;
+  putTask: ({
+    name,
+    id,
+    status,
+  }: {
+    name: string;
+    id: number;
+    status: boolean;
+  }) => void;
+  deleteTask: ({ id }: { id: number }) => void;
 }
 
 export const DataContext = React.createContext<DataContext | undefined>(
@@ -20,10 +31,57 @@ type Props = {
 };
 
 export function DataProvider({ children }: Props) {
-  const [tasks, setTasks] = React.useState<Task[]>(dataTasks);
+  const getData = async () => {
+    try {
+      const response = await api.get("/tarefas");
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createTask = async ({ name }: { name: string }) => {
+    try {
+      const response = await api.post("/tarefas", {
+        tarefa: name,
+      });
+      await getData();
+      console.log("clicou botao de criar");
+    } catch (error) {
+      console.error(error, "não criou a tarefa");
+    }
+  };
+
+  const putTask = async ({
+    name,
+    id,
+    status,
+  }: {
+    name: string;
+    id: number;
+    status: boolean;
+  }) => {
+    try {
+      const response = await api.put(`/tarefas/${id}`, {
+        tarefa: name,
+        status: status,
+      });
+    } catch (error) {
+      console.error(error, "não editou a tarefa");
+    }
+  };
+
+  const deleteTask = async ({ id }: { id: number }) => {
+    try {
+      const response = await api.delete(`/tarefas/${id}`);
+      console.log(`Deletou a tarefa ${id}`);
+    } catch (error) {
+      console.error(error, "não deletou a tarefa");
+    }
+  };
 
   return (
-    <DataContext.Provider value={{ tasks, setTasks }}>
+    <DataContext.Provider value={{ getData, createTask, putTask, deleteTask }}>
       {children}
     </DataContext.Provider>
   );

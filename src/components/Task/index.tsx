@@ -7,19 +7,21 @@ import { useModal } from "../../context/ModalContext";
 import TrashButton from "../TrashButton";
 
 type Props = {
-  name: string;
-  done: boolean;
+  tarefa: string;
+  status: boolean;
 };
 
-export default function Task({ name, done }: Props) {
+export default function Task({ tarefa, status }: Props) {
   const { openModal } = useModal();
   return (
-    <S.ContainerTask done={done}>
+    <S.ContainerTask done={status}>
       <S.ContainerLeft>
-        <S.CheckBox>{done ? <CircleCheck /> : <Circle />}</S.CheckBox>
-        <S.TextTask done={done}>{name}</S.TextTask>
+        <S.CheckBox>{status ? <CircleCheck /> : <Circle />}</S.CheckBox>
+        <S.TextTask done={status}>{tarefa}</S.TextTask>
       </S.ContainerLeft>
-      <S.CheckTrash onPress={() => openModal(<TrashButton taskName={name} />)}>
+      <S.CheckTrash
+        onPress={() => openModal(<TrashButton taskName={tarefa} />)}
+      >
         <Trash />
       </S.CheckTrash>
     </S.ContainerTask>

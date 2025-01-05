@@ -1,8 +1,10 @@
 import React from "react";
+import api from "../services/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  handleLogin: () => void;
+  handleLogin: (credentions: { username: string; password: string }) => void;
   handleLogout: () => void;
 }
 
@@ -17,9 +19,53 @@ type Props = {
 export function AuthProvider({ children }: Props) {
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
 
-  const handleLogin = () => {
-    console.log("clicou login");
-    setIsAuthenticated(true);
+  React.useEffect(() => {
+    async function checkLogin() {
+      await haveAuth();
+      // AsyncStorage.clear();
+    }
+    checkLogin();
+  }, []);
+
+  const haveAuth = async () => {
+    try {
+      const authStorage = await AsyncStorage.getItem("@auth");
+      if (authStorage) {
+        api.defaults.headers.common["Authorization"] = authStorage;
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogin = async ({
+    username,
+    password,
+  }: {
+    username: string;
+    password: string;
+  }) => {
+    try {
+      const response = await api.post("/login", {
+        username: username,
+        password: password,
+      });
+
+      const { accessToken } = response.data;
+
+      if (accessToken) {
+        const bToken = `Bearer ${accessToken}`;
+        api.defaults.headers.common["Authorization"] = bToken;
+        AsyncStorage.setItem("@auth", bToken);
+        console.log(bToken);
+        setIsAuthenticated(true);
+      }
+
+      console.log("Clicou login e foi", response);
+    } catch (error) {
+      console.log("Não logou", error);
+    }
   };
   const handleLogout = () => {
     console.log("cliclou logout");

@@ -8,11 +8,14 @@ import Eye from "../../assets/eye.svg";
 import EyeSlash from "../../assets/eye-slash.svg";
 
 export default function Authentication() {
-  const [viewPassword, setViewPassword] = React.useState(false);
+  const [viewPassword, setViewPassword] = React.useState(true);
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const auth = useContext(AuthContext);
 
   function handleViewPassword() {
     setViewPassword(!viewPassword);
+    console.log(viewPassword, "doamfod");
   }
 
   return (
@@ -20,12 +23,21 @@ export default function Authentication() {
       <Logo />
       <S.Form>
         <S.FormUsername>
-          <Input placeholder="Username" />
+          <Input
+            placeholder="Username"
+            value={username}
+            onChangeText={(text: string) => setUsername(text)}
+          />
         </S.FormUsername>
         <S.FormPassword>
-          <Input placeholder="Password" />
-          <Button onPress={handleViewPassword} padding="15px 20px">
-            {viewPassword ? (
+          <Input
+            placeholder="Password"
+            value={password}
+            onChangeText={(text: string) => setPassword(text)}
+            secureTextEntry={viewPassword}
+          />
+          <Button onPress={() => handleViewPassword()} padding="15px 20px">
+            {!viewPassword ? (
               <EyeSlash fill={"#fff"} width={20} />
             ) : (
               <Eye fill={"#fff"} width={20} />
@@ -35,7 +47,7 @@ export default function Authentication() {
         <Button
           text="Login"
           variant="Authentication"
-          onPress={auth?.handleLogin}
+          onPress={() => auth?.handleLogin({ username, password })}
         />
       </S.Form>
     </S.Container>

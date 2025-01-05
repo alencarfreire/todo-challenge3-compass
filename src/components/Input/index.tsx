@@ -4,10 +4,18 @@ import * as S from "./styles";
 type Props = {
   placeholder?: string;
   value?: string;
-  onChangeText?: () => void;
+  onChangeText?: (text: string) => void;
+  secureTextEntry?: boolean;
+  multiline?: boolean;
 };
 
-export default function Input({ placeholder, value, onChangeText }: Props) {
+export default function Input({
+  placeholder,
+  value,
+  onChangeText,
+  secureTextEntry,
+  multiline,
+}: Props) {
   const [isFocused, setIsFocused] = useState(false);
   return (
     <S.TextInput
@@ -16,8 +24,9 @@ export default function Input({ placeholder, value, onChangeText }: Props) {
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       placeholder={placeholder}
-      multiline
+      multiline={multiline}
       value={value}
+      secureTextEntry={secureTextEntry}
     />
   );
 }

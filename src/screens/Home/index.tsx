@@ -1,5 +1,5 @@
 import { View, Text, StatusBar } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../components/Button";
 import * as S from "./styles";
 import Logo from "../../assets/logo.svg";
@@ -9,14 +9,41 @@ import SignOut from "../../assets/sign-out.svg";
 import MagnifyingGlass from "../../assets/magnifying-glass.svg";
 import PlusCircle from "../../assets/plus-circle-regular.svg";
 import TaskList from "../../components/TaskList";
-import { DataProvider } from "../../context/DataContext";
+import { DataContext, DataProvider } from "../../context/DataContext";
 import { CustomModal } from "../../components/CustomModal";
 import NewTask from "../../components/NewTask";
 import { useModal } from "../../context/ModalContext";
 
+interface TaskProps {
+  tarefa: string;
+  status: boolean;
+  id: number;
+}
+
 export default function Home() {
+  const [tasks, setTasks] = React.useState<TaskProps[]>([]);
+  const dataContext = React.useContext(DataContext);
   const auth = React.useContext(AuthContext);
   const { openModal } = useModal();
+
+  if (!dataContext) {
+    throw new Error("error");
+  }
+
+  const { getData } = dataContext;
+
+  useEffect(() => {
+    const loadTasks = async () => {
+      const attData = await getData();
+      setTasks(attData);
+    };
+    loadTasks();
+    // const timer = setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1000);
+    // return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <StatusBar barStyle={"dark-content"} translucent />
@@ -39,14 +66,14 @@ export default function Home() {
         </S.Header>
         <DataProvider>
           <S.ContainerTasks>
-            <TaskList />
+            <TaskList tasks={tasks} setTasks={setTasks} />
           </S.ContainerTasks>
         </DataProvider>
         <S.ContainerNewTask>
           <Button
             padding="16px 24px"
             text="Criar"
-            onPress={() => openModal(<NewTask />)}
+            onPress={() => openModal(<NewTask setTasks={setTasks} />)}
           >
             <PlusCircle />
           </Button>

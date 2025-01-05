@@ -7,15 +7,39 @@ import NoTasks from "../NoTasks";
 import Loading from "../Loading";
 import * as S from "./styles";
 
-export default function TaskList() {
+interface Tasks {
+  tarefa: string;
+  status: boolean;
+  id: number;
+}
+
+export default function TaskList({
+  tasks,
+  setTasks,
+}: {
+  tasks: Tasks[];
+  setTasks: React.Dispatch<React.SetStateAction<Tasks[]>>;
+}) {
   const context = useContext(DataContext);
   const [isLoading, setIsLoading] = useState(true);
 
+  if (!context) {
+    throw new Error("n rodou");
+  }
+
+  const { getData } = context;
+
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const loadTasks = async () => {
+      const attData = await getData();
+      setTasks(attData);
       setIsLoading(false);
-    }, 1000);
-    return () => clearTimeout(timer);
+    };
+    loadTasks();
+    // const timer = setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 1000);
+    // return () => clearTimeout(timer);
   }, []);
 
   if (!context) {
@@ -27,8 +51,7 @@ export default function TaskList() {
     );
   }
 
-  const { tasks } = context;
-  const completedTasksCount = tasks.filter((task) => task.done).length;
+  const completedTasksCount = tasks.filter((task) => task.status).length;
 
   if (isLoading) {
     return (
@@ -48,7 +71,7 @@ export default function TaskList() {
   }
 
   const sortedTasks = [...tasks].sort(
-    (a, b) => Number(a.done) - Number(b.done)
+    (a, b) => Number(a.status) - Number(b.status)
   );
 
   return (
@@ -60,7 +83,9 @@ export default function TaskList() {
       <FlatList
         data={sortedTasks}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Task name={item.name} done={item.done} />}
+        renderItem={({ item }) => (
+          <Task tarefa={item.tarefa} status={item.status} />
+        )}
         initialNumToRender={6}
       />
     </>
