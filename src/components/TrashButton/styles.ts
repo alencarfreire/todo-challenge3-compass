@@ -21,3 +21,10 @@ export const Buttons = styled.View`
 export const ContainerInput = styled.View`
   height: 80px;
 `;
+
+export const ContainerEditSave = styled.View`
+  flex: 1;
+`;
+export const ContainerRemove = styled.View`
+  flex: 1;
+`;

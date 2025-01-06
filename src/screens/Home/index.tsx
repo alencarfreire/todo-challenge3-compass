@@ -1,4 +1,4 @@
-import { View, Text, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import React, { useEffect } from "react";
 import Button from "../../components/Button";
 import * as S from "./styles";

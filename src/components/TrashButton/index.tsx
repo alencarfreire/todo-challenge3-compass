@@ -31,11 +31,17 @@ export default function TrashButton({ taskName }: Props) {
 
       <S.Buttons>
         {isEditing ? (
-          <Button text="Salvar" />
+          <S.ContainerEditSave>
+            <Button text="Salvar" />
+          </S.ContainerEditSave>
         ) : (
-          <Button text="Editar" onPress={() => setIsEditing(true)} />
+          <S.ContainerEditSave>
+            <Button text="Editar" onPress={() => setIsEditing(true)} />
+          </S.ContainerEditSave>
         )}
-        <Button text="Remover" />
+        <S.ContainerRemove>
+          <Button text="Remover" />
+        </S.ContainerRemove>
       </S.Buttons>
     </S.Container>
   );

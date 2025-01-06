@@ -45,7 +45,8 @@ export function DataProvider({ children }: Props) {
       const response = await api.post("/tarefas", {
         tarefa: name,
       });
-      await getData();
+      const attData = await getData();
+      // setList(attData)
       console.log("clicou botao de criar");
     } catch (error) {
       console.error(error, "não criou a tarefa");
