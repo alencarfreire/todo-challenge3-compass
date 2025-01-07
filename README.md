@@ -134,6 +134,7 @@ The API will be provided for project use.
 - List all tasks 📝.
 - Filter tasks by status (created/completed).
 
-### Demostration
+### Delivery
 
-[Demostration in Loom](https://www.loom.com/share/f48b6c9a084349c9b31aa47681de4242?sid=70b30c43-51ea-4b39-afcf-ec30844eaa35)
+Challenge delivery video:
+[Video in Loom](https://www.loom.com/share/f48b6c9a084349c9b31aa47681de4242?sid=70b30c43-51ea-4b39-afcf-ec30844eaa35)
