@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { theme } from "../../theme/theme";
+import { theme } from "../../constants/theme";
 import EyeSlash from "../../assets/eye-slash.svg";
 
 export const EyeSlashIcon = styled(EyeSlash)`

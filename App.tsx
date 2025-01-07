@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ThemeProvider } from "styled-components/native";
-import { theme } from "./src/theme/theme";
+import { theme } from "./src/constants/theme";
 import {
   useFonts,
   Inter_400Regular,
