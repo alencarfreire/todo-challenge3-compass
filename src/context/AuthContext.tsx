@@ -24,7 +24,7 @@ export function AuthProvider({ children }: Props) {
   React.useEffect(() => {
     async function checkLogin() {
       await haveAuth();
-      // AsyncStorage.clear();
+      AsyncStorage.clear();
     }
     checkLogin();
   }, []);
