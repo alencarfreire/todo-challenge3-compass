@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Task from "../Task";
 import TasksStatus from "../TasksStatus";
-import { FlatList, View, Text } from "react-native";
+import { FlatList, Text } from "react-native";
 import { DataContext } from "../../context/DataContext";
 import NoTasks from "../NoTasks";
 import Loading from "../Loading";
@@ -31,25 +31,18 @@ export default function TaskList({
 
   useEffect(() => {
     const loadTasks = async () => {
-      const attData = await getData();
-      setTasks(attData);
-      setIsLoading(false);
+      try {
+        const attData = await getData();
+        setTasks(Array.isArray(attData) ? attData : []);
+      } catch (error) {
+        console.error("Erro ao carregar tarefas", error);
+        setTasks([]);
+      } finally {
+        setIsLoading(false);
+      }
     };
     loadTasks();
-    // const timer = setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 1000);
-    // return () => clearTimeout(timer);
-  }, []);
-
-  if (!context) {
-    return (
-      <>
-        <TasksStatus created="0" done="0" />
-        <NoTasks />
-      </>
-    );
-  }
+  }, [getData, setTasks]);
 
   const completedTasksCount = tasks.filter((task) => task.status).length;
 
@@ -57,6 +50,7 @@ export default function TaskList({
     return (
       <S.ContainerLoading>
         <Loading />
+        <Text>Carregando suas tarefas...</Text>
       </S.ContainerLoading>
     );
   }
@@ -70,9 +64,10 @@ export default function TaskList({
     );
   }
 
-  const sortedTasks = [...tasks].sort(
-    (a, b) => Number(a.status) - Number(b.status)
-  );
+  const sortedTasks = [...tasks].sort((a, b) => {
+    if (a.status === b.status) return 0;
+    return a.status ? 1 : -1;
+  });
 
   return (
     <>
@@ -82,9 +77,9 @@ export default function TaskList({
       />
       <FlatList
         data={sortedTasks}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Task tarefa={item.tarefa} status={item.status} />
+          <Task tarefa={item.tarefa} status={item.status} id={item.id} />
         )}
         initialNumToRender={6}
       />

@@ -4,27 +4,60 @@ import { useModal } from "../../context/ModalContext";
 import * as S from "./styles";
 import Button from "../Button";
 import Input from "../Input";
+import { DataContext } from "../../context/DataContext";
 
 type Props = {
   taskName: string;
+  taskId: number;
+  taskStatus: boolean;
 };
 
-export default function TrashButton({ taskName }: Props) {
+export default function TrashButton({ taskName, taskId, taskStatus }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(taskName);
   const { closeModal } = useModal();
+  const dataContext = useContext(DataContext);
+
+  if (!dataContext) {
+    throw new Error("DataContext não carregou");
+  }
+
+  const { deleteTask, putTask, getData } = dataContext;
+
+  const handlePut = async () => {
+    try {
+      await putTask({ name: editedName, id: taskId, status: taskStatus });
+      await getData();
+      closeModal();
+    } catch (error) {
+      console.log("Erro ao atualizar tarefa", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteTask({ id: taskId });
+      closeModal();
+    } catch (error) {
+      console.log("Erro ao remover tarefa", error);
+    }
+  };
+
   return (
     <S.Container>
       {isEditing ? (
         <>
           <HeaderModal title="Editar tarefa" onPress={closeModal} />
           <S.ContainerInput>
-            <Input value={editedName} />
+            <Input
+              value={editedName}
+              onChangeText={(text) => setEditedName(text)}
+            />
           </S.ContainerInput>
         </>
       ) : (
         <>
-          <HeaderModal title="Tarefa : Id" onPress={closeModal} />
+          <HeaderModal title={`Tarefas: ${taskId}`} onPress={closeModal} />
           <S.TitleTask>{taskName}</S.TitleTask>
         </>
       )}
@@ -32,7 +65,7 @@ export default function TrashButton({ taskName }: Props) {
       <S.Buttons>
         {isEditing ? (
           <S.ContainerEditSave>
-            <Button text="Salvar" />
+            <Button text="Salvar" onPress={handlePut} />
           </S.ContainerEditSave>
         ) : (
           <S.ContainerEditSave>
@@ -40,7 +73,7 @@ export default function TrashButton({ taskName }: Props) {
           </S.ContainerEditSave>
         )}
         <S.ContainerRemove>
-          <Button text="Remover" />
+          <Button text="Remover" onPress={handleDelete} />
         </S.ContainerRemove>
       </S.Buttons>
     </S.Container>
