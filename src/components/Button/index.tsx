@@ -18,7 +18,7 @@ export default function Button({
 }: Props) {
   return (
     <>
-      <S.Button onPress={onPress} padding={padding}>
+      <S.Button onPress={onPress} padding={padding} testID="button-component">
         {text && <S.ButtonText variant={variant}>{text}</S.ButtonText>}
         {children}
       </S.Button>
