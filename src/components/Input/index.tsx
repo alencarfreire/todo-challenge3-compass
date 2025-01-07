@@ -7,6 +7,7 @@ type Props = {
   onChangeText?: (text: string) => void;
   secureTextEntry?: boolean;
   multiline?: boolean;
+  error?: boolean;
 };
 
 export default function Input({
@@ -15,6 +16,7 @@ export default function Input({
   onChangeText,
   secureTextEntry,
   multiline,
+  error,
 }: Props) {
   const [isFocused, setIsFocused] = useState(false);
   return (
@@ -27,6 +29,7 @@ export default function Input({
       multiline={multiline}
       value={value}
       secureTextEntry={secureTextEntry}
+      error={error}
     />
   );
 }

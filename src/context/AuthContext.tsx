@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  errorLogin: boolean;
   handleLogin: (credentions: { username: string; password: string }) => void;
   handleLogout: () => void;
 }
@@ -18,6 +19,7 @@ type Props = {
 
 export function AuthProvider({ children }: Props) {
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(false);
+  const [errorLogin, setErrorLogin] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     async function checkLogin() {
@@ -60,10 +62,12 @@ export function AuthProvider({ children }: Props) {
         AsyncStorage.setItem("@auth", bToken);
         console.log(bToken);
         setIsAuthenticated(true);
+        setErrorLogin(false);
       }
 
       console.log("Clicou login e foi", response);
     } catch (error) {
+      setErrorLogin(true);
       console.log("Não logou", error);
     }
   };
@@ -74,7 +78,7 @@ export function AuthProvider({ children }: Props) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, handleLogin, handleLogout }}
+      value={{ isAuthenticated, handleLogin, handleLogout, errorLogin }}
     >
       {children}
     </AuthContext.Provider>

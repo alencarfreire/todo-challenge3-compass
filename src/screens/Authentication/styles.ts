@@ -33,3 +33,10 @@ export const FormPassword = styled.View`
   width: 100%;
   align-items: center;
 `;
+
+export const ErrorText = styled.Text`
+  font-family: ${theme.font.family.tag};
+  font-size: ${theme.font.size.tag};
+  line-height: ${theme.font.lineHeight.tag};
+  color: ${theme.colors.feedback.danger};
+`;

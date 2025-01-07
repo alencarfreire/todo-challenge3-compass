@@ -27,14 +27,17 @@ export default function Authentication() {
             placeholder="Username"
             value={username}
             onChangeText={(text: string) => setUsername(text)}
+            error={auth?.errorLogin}
           />
         </S.FormUsername>
+        {auth?.errorLogin && <S.ErrorText>Username inválido</S.ErrorText>}
         <S.FormPassword>
           <Input
             placeholder="Password"
             value={password}
             onChangeText={(text: string) => setPassword(text)}
             secureTextEntry={viewPassword}
+            error={auth?.errorLogin}
           />
           <Button onPress={() => handleViewPassword()} padding="15px 20px">
             {!viewPassword ? (
@@ -44,6 +47,7 @@ export default function Authentication() {
             )}
           </Button>
         </S.FormPassword>
+        {auth?.errorLogin && <S.ErrorText>Senha inválida</S.ErrorText>}
         <Button
           text="Login"
           variant="Authentication"

@@ -12,6 +12,10 @@ export const TextInput = styled.TextInput.attrs(() => ({
   font-family: ${theme.font.family.input};
   font-size: ${theme.font.size.input};
   line-height: ${theme.font.lineHeight.input};
-  border-color: ${(props: { isFocused: boolean }) =>
-    props.isFocused ? theme.colors.main.purpleBase : theme.colors.base.gray300};
+  border-color: ${(props: { isFocused: boolean; error?: boolean }) =>
+    props.error
+      ? theme.colors.feedback.danger
+      : props.isFocused
+      ? theme.colors.main.purpleBase
+      : theme.colors.base.gray300};
 `;
