@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: Input should match the snapshot 1`] = `
+<TextInput
+  isFocused={false}
+  onBlur={[Function]}
+  onFocus={[Function]}
+  placeholder="Clique aqui"
+  placeholderTextColor="#6B6572"
+  style={
+    {
+      "backgroundColor": "#F0EDF2",
+      "borderBottomLeftRadius": 8,
+      "borderBottomRightRadius": 8,
+      "borderColor": "#E0DCE4",
+      "borderStyle": "solid",
+      "borderTopLeftRadius": 8,
+      "borderTopRightRadius": 8,
+      "borderWidth": 2,
+      "flexBasis": 0,
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "fontFamily": "Inter_400Regular",
+      "fontSize": 16,
+      "lineHeight": 22.4,
+      "paddingBottom": 18,
+      "paddingLeft": 18,
+      "paddingRight": 18,
+      "paddingTop": 18,
+    }
+  }
+/>
+`;
