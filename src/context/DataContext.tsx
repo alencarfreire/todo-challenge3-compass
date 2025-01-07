@@ -37,17 +37,13 @@ export function DataProvider({ children }: Props) {
       return response.data;
     } catch (error) {
       console.log(error);
+      return [];
     }
   };
 
   const createTask = async ({ name }: { name: string }) => {
     try {
-      const response = await api.post("/tarefas", {
-        tarefa: name,
-      });
-      const attData = await getData();
-      // setList(attData)
-      console.log("clicou botao de criar");
+      await api.post("/tarefas", { tarefa: name });
     } catch (error) {
       console.error(error, "não criou a tarefa");
     }
@@ -63,10 +59,7 @@ export function DataProvider({ children }: Props) {
     status: boolean;
   }) => {
     try {
-      const response = await api.put(`/tarefas/${id}`, {
-        tarefa: name,
-        status: status,
-      });
+      await api.put(`/tarefas/${id}`, { tarefa: name, status });
     } catch (error) {
       console.error(error, "não editou a tarefa");
     }
@@ -74,7 +67,7 @@ export function DataProvider({ children }: Props) {
 
   const deleteTask = async ({ id }: { id: number }) => {
     try {
-      const response = await api.delete(`/tarefas/${id}`);
+      await api.delete(`/tarefas/${id}`);
       console.log(`Deletou a tarefa ${id}`);
     } catch (error) {
       console.error(error, "não deletou a tarefa");

@@ -10,9 +10,15 @@ type Props = {
   taskName: string;
   taskId: number;
   taskStatus: boolean;
+  setTasks: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export default function TrashButton({ taskName, taskId, taskStatus }: Props) {
+export default function TrashButton({
+  taskName,
+  taskId,
+  taskStatus,
+  setTasks,
+}: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState(taskName);
   const { closeModal } = useModal();
@@ -27,7 +33,8 @@ export default function TrashButton({ taskName, taskId, taskStatus }: Props) {
   const handlePut = async () => {
     try {
       await putTask({ name: editedName, id: taskId, status: taskStatus });
-      await getData();
+      const updatedTasks = await getData();
+      setTasks(updatedTasks);
       closeModal();
     } catch (error) {
       console.log("Erro ao atualizar tarefa", error);
@@ -37,6 +44,8 @@ export default function TrashButton({ taskName, taskId, taskStatus }: Props) {
   const handleDelete = async () => {
     try {
       await deleteTask({ id: taskId });
+      const updatedTasks = await getData();
+      setTasks(updatedTasks);
       closeModal();
     } catch (error) {
       console.log("Erro ao remover tarefa", error);

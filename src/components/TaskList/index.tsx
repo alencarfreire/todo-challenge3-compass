@@ -42,7 +42,7 @@ export default function TaskList({
       }
     };
     loadTasks();
-  }, [getData, setTasks]);
+  }, []);
 
   const completedTasksCount = tasks.filter((task) => task.status).length;
 
@@ -79,7 +79,12 @@ export default function TaskList({
         data={sortedTasks}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Task tarefa={item.tarefa} status={item.status} id={item.id} />
+          <Task
+            tarefa={item.tarefa}
+            status={item.status}
+            id={item.id}
+            setTasks={setTasks}
+          />
         )}
         initialNumToRender={6}
       />

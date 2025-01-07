@@ -11,9 +11,10 @@ type Props = {
   tarefa: string;
   status: boolean;
   id: number;
+  setTasks: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export default function Task({ tarefa, status, id }: Props) {
+export default function Task({ tarefa, status, id, setTasks }: Props) {
   const { openModal } = useModal();
   const dataContext = useContext(DataContext);
 
@@ -26,7 +27,8 @@ export default function Task({ tarefa, status, id }: Props) {
   const handlePut = async () => {
     try {
       await putTask({ name: tarefa, id: id, status: !status });
-      await getData();
+      const updatedTasks = await getData();
+      setTasks(updatedTasks);
     } catch (error) {
       console.log("Erro ao atualizar tarefa", error);
     }
@@ -43,7 +45,12 @@ export default function Task({ tarefa, status, id }: Props) {
       <S.CheckTrash
         onPress={() =>
           openModal(
-            <TrashButton taskName={tarefa} taskId={id} taskStatus={status} />
+            <TrashButton
+              taskName={tarefa}
+              taskId={id}
+              taskStatus={status}
+              setTasks={setTasks}
+            />
           )
         }
       >

@@ -1,5 +1,5 @@
 import { StatusBar } from "react-native";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import * as S from "./styles";
 import Logo from "../../assets/logo.svg";
@@ -21,11 +21,10 @@ interface TaskProps {
 }
 
 export default function Home() {
-  const [tasks, setTasks] = useState<TaskProps[]>([]);
-  const [filteredTasks, setFilteredTasks] = useState<TaskProps[]>([]);
+  const [tasks, setTasks] = React.useState<TaskProps[]>([]);
   const [search, setSearch] = useState("");
-  const dataContext = useContext(DataContext);
-  const auth = useContext(AuthContext);
+  const dataContext = React.useContext(DataContext);
+  const auth = React.useContext(AuthContext);
   const { openModal } = useModal();
 
   if (!dataContext) {
@@ -38,19 +37,19 @@ export default function Home() {
     const loadTasks = async () => {
       const attData = await getData();
       setTasks(attData);
-      setFilteredTasks(attData);
     };
     loadTasks();
   }, []);
 
   const handleSearch = () => {
     if (search) {
-      const filtered = tasks.filter((task) =>
-        task.tarefa.toLowerCase().includes(search.toLowerCase())
+      setTasks((prevTasks) =>
+        prevTasks.filter((task) =>
+          task.tarefa.toLowerCase().includes(search.toLowerCase())
+        )
       );
-      setFilteredTasks(filtered);
     } else {
-      setFilteredTasks(tasks);
+      getData().then(setTasks);
     }
   };
 
@@ -80,7 +79,7 @@ export default function Home() {
         </S.Header>
         <DataProvider>
           <S.ContainerTasks>
-            <TaskList tasks={filteredTasks} setTasks={setTasks} />
+            <TaskList tasks={tasks} setTasks={setTasks} />
           </S.ContainerTasks>
         </DataProvider>
         <S.ContainerNewTask>

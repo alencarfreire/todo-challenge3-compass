@@ -29,10 +29,16 @@ export default function NewTask({
   const { createTask, getData } = context;
 
   const handleCreateTask = async () => {
+    if (!newTask.trim()) {
+      console.error("A tarefa não pode estar vazia.");
+      return;
+    }
+
     try {
       await createTask({ name: newTask });
       const attData = await getData();
       setTasks(attData);
+      setNewTask("");
       closeModal();
     } catch (error) {
       console.error("Erro ao criar tarefa:", error);
