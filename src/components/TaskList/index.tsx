@@ -50,7 +50,6 @@ export default function TaskList({
     return (
       <S.ContainerLoading>
         <Loading />
-        <Text>Carregando suas tarefas...</Text>
       </S.ContainerLoading>
     );
   }
